@@ -75,7 +75,7 @@ app.post('/api/shorturl', async function (req, res) {
       res.json({ error: 'something went wrong' });
     }
   } else {
-    res.json({ error: 'invalid uri' });
+    res.json({ error: 'invalid url' });
   }
 });
 
