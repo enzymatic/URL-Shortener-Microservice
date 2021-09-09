@@ -3,7 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const mongodb = require('mongodb');
 const mongoose = require('mongoose');
-const validUrl = require('valid-url');
 
 const app = express();
 
@@ -49,7 +48,17 @@ function randomUrlcode() {
 app.post('/api/shorturl', async function (req, res) {
   const { url } = req.body;
 
-  if (validUrl.isUri(url)) {
+  const isValid = new RegExp(
+    '^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?'
+  );
+
+  // if (isValid.test('http://google.com')) {
+  //   console.log('Successful match');
+  // } else {
+  //   console.log('No match');
+  // }
+
+  if (isValid.test(url)) {
     try {
       let inDatabase = await UrlModel.findOne({
         original_url: url,
