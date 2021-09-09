@@ -52,12 +52,6 @@ app.post('/api/shorturl', async function (req, res) {
     '^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?'
   );
 
-  // if (isValid.test('http://google.com')) {
-  //   console.log('Successful match');
-  // } else {
-  //   console.log('No match');
-  // }
-
   if (isValid.test(url)) {
     try {
       let inDatabase = await UrlModel.findOne({
